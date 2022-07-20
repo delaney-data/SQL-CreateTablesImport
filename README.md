@@ -56,24 +56,22 @@ As we can see, PostgreSQL has color coding for the column names, data types, and
 
 # Import Data into Tables (2 methods)
 <p>Now that you have the tables in your database, you need to insert data into those tables. Here are two different ways you can do this:</p>
-<ol style="list-style-type: decimal;">
-    <li style="font-weight: bold;"><strong>Using PgAdmin (GUI method) </strong>This is the easiest. Does not require special file permissions.
-        <ol style="list-style-type: circle; font-weight: initial;">
-            <li style="line-height: 1.15;">&nbsp;Right-click on your Database -> Go to Schemas -> Tables -> Right-click on your table and select Import/Export Data
-            </li>
-        </ol>
-    
- On the options side, locate the file path of your CSV dataset and toggle headers ON:
-    <br>
+<p><strong>1. Using PgAdmin (GUI method)</strong></p>
+<ul>
+    <li>This is the easiest. Does not require special file permissions.&nbsp;</li>
+    <li>Right-click on your database ➡️ go to <strong>Schemas</strong> ➡️<strong>Tables</strong> ➡️ Right-click on the table and select <strong>Import/Export Data</strong></li>
+</ul>
+<br>On the options side, locate the file path of your CSV dataset and toggle headers ON:<br>
         <br><img src="https://i.imgur.com/S8jT1Yw.png?1" height="80%" width="50%" alt="SqlTut"/>
     <br>
  On the columns side, select all columns in the file to import (minus the ID primary key column we created for the table). 
  <br>Note: If your dataset includes null strings (as in, nulls are represented by NA or some other string in your data), you need to specify what PostgreSQL should do when it encounters ‘NA’ in the data. For my example, I have the NULL Strings as ‘NA’. <br>
        <br><img src="https://i.imgur.com/bPTFrzW.png" height="80%" width="50%" alt="SqlTut"/>
     <br></li>
-    <li style="font-weight: bold;"><strong>Using the SQL COPY command</strong>
-        <ol style="list-style-type: circle; font-weight: initial;">
-            <li style="line-height: 1.15;">Requires special permissions for PostgreSQL to read/write files to the local PC (if that&rsquo;s where you&rsquo;re pulling data).
+<p><strong>2. Using the SQL COPY command</strong></p>
+<ul>
+    <li>Requires special permissions for PostgreSQL to read/write files to the local PC (if that&rsquo;s where you&rsquo;re pulling data).</li>
+</ul>
       <p><u>General COPY command syntax:</u></p>
 <blockquote>COPY table_name (column_name, column_name) <br>FROM &lsquo;C:\Users\Name\Location.csv&rsquo; 
     <br>DELIMITER &lsquo;,&rsquo; NULL &lsquo;NA&rsquo; CSV HEADER;&nbsp;</blockquote></li>
