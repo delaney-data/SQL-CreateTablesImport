@@ -73,7 +73,10 @@ As we can see, PostgreSQL has color coding for the column names, data types, and
     <br></li>
     <li style="font-weight: bold;"><strong>Using the SQL COPY command</strong>
         <ol style="list-style-type: circle; font-weight: initial;">
-            <li style="line-height: 1.15;">Requires special permissions for PostgreSQL to read/write files to the local PC (if that&rsquo;s where you&rsquo;re pulling data).</li>
+            <li style="line-height: 1.15;">Requires special permissions for PostgreSQL to read/write files to the local PC (if that&rsquo;s where you&rsquo;re pulling data).
+      <p><u>General COPY command syntax:</u></p>
+<blockquote>COPY table_name (column_name, column_name) <br>FROM &lsquo;C:\Users\Name\Location.csv&rsquo; 
+    <br>DELIMITER &lsquo;,&rsquo; NULL &lsquo;NA&rsquo; CSV HEADER;&nbsp;</blockquote></li>
         </ol>
     </li>
 </ol>
