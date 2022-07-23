@@ -59,19 +59,17 @@ CREATE TABLE table_name (
 
         PostgreSQL has many data types, for more details on each type (and storage limitations) refer to this handy documentation:                          https://www.postgresql.org/docs/current/datatype.html
 
-- A column <b>CONTRAINT</b> is an additional requirement or condition for the values in that column.
+- A column <b>CONSTRAINT</b> is an additional requirement or condition for the values in that column. 
     - Common column constaints:
         - `NOT NULL` Ensures there is never <i>null</i> data (or an absenece of data). Very useful when importing new data to table. For example, if you are importing new  data into a customer sales table and company policy is to always require an email address you would set the email_address column constraint as `NOT NULL`.  
          
         - `UNIQUE` Ensures that each value in the column is unique (not repeated). For example, you may want to ensure each row of a phone number column is unique per person.
         - `PRIMARY KEY` An assigned number, used to uniquely identify each row in a table. This can allow you to target, retrieve or modify a row based on the specific PK (primary key).
   
-### From dataset to Table:
+### From Dataset ➡️ Table:
 Upon reviewing the headers and data types my CSV dataset below, I can build my SQL query to create the table structure.
-
 <br><img src="https://i.imgur.com/bRSOTyf.png?1" height="80%" width="70%" alt="SqlTut"/></br>
 <br></br>       
-
 ```sql
 
 --- First table (county_pop)
@@ -112,20 +110,22 @@ CREATE TABLE education_income(
 	);
 ```
 
-<hr>
 
 To learn more about data types and constraints when building your tables, refer to the documention here: https://www.postgresql.org/docs/current/
 
 # Import Data into Tables (2 methods)
-<p>Now that you have the tables in your database, you need to insert data into those tables. Here are two different ways you can do this:</p>
-<p><strong>1. Using PgAdmin (GUI method)</strong></p>
-<ul>
-    <li>This is the easiest. Does not require special file permissions.&nbsp;</li>
-    <li>Right-click on your database ➡️ go to <strong>Schemas</strong> ➡️<strong>Tables</strong> ➡️ Right-click on the table and select <strong>Import/Export Data</strong></li>
-</ul>
-<br>On the options side, locate the file path of your CSV dataset and toggle headers ON:<br>
-        <br><img src="https://i.imgur.com/S8jT1Yw.png?1" height="80%" width="50%" alt="SqlTut"/>
-    <br>
+Now that we have tables in the database, we need to insert data into those tables. Here are two different ways to accomplish this:
+<br></br>
+<br><strong>1. Using PgAdmin (GUI method)</strong></br>
+- This is the easiest. Does not require special file permissions
+- Right-click on your database 
+➡️ go to <strong>Schemas</strong>
+➡️ <strong>Tables</strong>
+➡️ Right-click on your table and select <strong>Import/Export Data</strong>
+<br>
+	On the options side, locate the file path of your CSV dataset and toggle headers ON:</br>
+<br><img src="https://i.imgur.com/S8jT1Yw.png?1" height="80%" width="50%" alt="SqlTut"/>
+<br>
  On the columns side, select all columns in the file to import (minus the ID primary key column we created for the table). 
  <br>Note: If your dataset includes null strings (as in, nulls are represented by NA or some other string in your data), you need to specify what PostgreSQL should do when it encounters ‘NA’ in the data. For my example, I have the NULL Strings as ‘NA’. <br>
        <br><img src="https://i.imgur.com/bPTFrzW.png" height="80%" width="50%" alt="SqlTut"/>
