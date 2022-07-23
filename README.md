@@ -17,7 +17,7 @@ A demonstration of how to create tables in PostgreSQL and import data for analys
     <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">In PgAdmin, create your database first by right-clicking <em>Databases</em> and create a new database.</span></li>
     <br><img src="https://i.imgur.com/5ctigjL.png" height="80%" width="50%" alt="SqlTut"/></br>
     <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">Name your DB and click save. If you don&rsquo;t immediately see your DB, right-click again on <em>Databases</em> and click <em>refresh</em>.</span></li>
-    <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">Query your DB by right-clicking its name and selecting the <strong>Query Tool</strong>.&nbsp;This will bring up the Query Panel and then you can begin interacting with it via SQL.&nbsp;</span></li><br><img src="https://i.imgur.com/e1eVuUq.png" height =40% width=40% alt="SqlTut"/></br>
+    <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">Query your DB by right-clicking its name and selecting the <strong>Query Tool</strong>.&nbsp;This will bring up the Query Panel and then you can begin interacting with it via SQL.&nbsp;</span></li><br><img src="https://i.imgur.com/e1eVuUq.png" height =60% width=60% alt="SqlTut"/></br>
 </ol>
 <p><span style="color: rgb(68, 114, 196); font-size: 16px; font-family: Arial, Helvetica, sans-serif;">Note: If you are working with multiple databases at once, be sure you are keeping track of which one you are currently querying. You can always see which one you currently querying via the top panel. The panel name should be: <strong>YourDatabaseName</strong>/PostgreSQL</span></p>
 
@@ -34,23 +34,27 @@ A demonstration of how to create tables in PostgreSQL and import data for analys
 </ul>
 <figcaption style="margin: 0in; line-height: 12.05pt; font-family: Calibri, sans-serif; text-align: center;"><span style="font-size:15px;"><u>This is the general<em>&nbsp;syntax</em> for creating a table.&nbsp;</u></span><u>Make sure to put a comma in between your columns:</u></figcaption>
 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:1.0in;line-height:12.05pt;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:15px;">&nbsp;</span></p>
-<blockquote>
-    <p style="margin: 0in 0in 0in 176px; line-height: 12.05pt; font-size: 15px; font-family: Calibri, sans-serif;"><span style="font-size:15px;">CREATE TABLE table_name<em>&nbsp;(</em></span></p>
-    <p style="margin: 0in 0in 0in 156px; line-height: 12.05pt; font-size: 15px; font-family: Calibri, sans-serif;"><em><span style="font-size:15px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></em><span style="font-size:15px;">column_name TYPE column_constraint<em>,</em></span></p>
-    <p style="margin: 0in 0in 0in 156px; line-height: 12.05pt; font-size: 15px; font-family: Calibri, sans-serif;"><span style="font-size:15px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;column_name TYPE column_constraint<em>,</em></span></p>
-    <p style="margin: 0in 0in 0in 156px; line-height: 12.05pt; font-size: 15px; font-family: Calibri, sans-serif;"><span style="font-size:15px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; column_name<em>&nbsp;</em>TYPE column_constraint</span></p>
-    <p style="margin: 0in 0in 0in 156px; line-height: 12.05pt; font-size: 15px; font-family: Calibri, sans-serif; text-indent: 0.5in;"><span style="font-size:15px;">);</span></p>
-</blockquote>
+
+```sql
+CREATE TABLE table_name (
+
+                column_name TYPE column_constraint,
+
+                column_name TYPE column_constraint,
+
+                column_name TYPE column_constraint);
+```
+
 <p style="margin: 0in; line-height: 12.05pt; font-size: 15px; font-family: Calibri, sans-serif; text-align: center;"><span style="font-size:15px;"><u>Upon reviewing the dataset below, I can build my SQL query to create the table format.</u>&nbsp;</span></p>
-<br><img src="https://i.imgur.com/bRSOTyf.png" height="80%" width="70%" alt="SqlTut"/></br>
+<br><img src="https://i.imgur.com/bRSOTyf.png?1" height="80%" width="70%" alt="SqlTut"/></br>
 
 <blockquote>First table (county_pop)
 
-<br><img src="https://i.imgur.com/mCjv9ct.png" height="80%" width="50%" alt="SqlTut"/></br></blockquote>
+<br><img src="https://i.imgur.com/mCjv9ct.png" height="80%" width="70%" alt="SqlTut"/></br></blockquote>
 
 <blockquote>Second table (education_income)
 
-<br><img src="https://i.imgur.com/Y7TAKn3.png?2" height="80%" width="50%" alt="SqlTut"/></br></blockquote>
+<br><img src="https://i.imgur.com/Y7TAKn3.png?2" height="80%" width="70%" alt="SqlTut"/></br></blockquote>
 <hr>
 As we can see, PostgreSQL has color coding for the column names, data types, and constraints. To learn more about data types and constraints when building your tables, refer to the documention here: https://www.postgresql.org/docs/current/
 
@@ -72,9 +76,13 @@ As we can see, PostgreSQL has color coding for the column names, data types, and
 <ul>
     <li>Requires special permissions for PostgreSQL to read/write files to the local PC (if that&rsquo;s where you&rsquo;re pulling data).</li>
 </ul>
-      <p><u>General COPY command syntax:</u></p>
-<blockquote>COPY table_name (column_name, column_name) <br>FROM &lsquo;C:\Users\Name\Location.csv&rsquo; 
-    <br>DELIMITER &lsquo;,&rsquo; NULL &lsquo;NA&rsquo; CSV HEADER;&nbsp;</blockquote></li>
-        </ol>
-    </li>
-</ol>
+<p><u>General COPY command syntax:</u></p>
+
+
+```sql
+COPY table_name (column_name, column_name, etc ...)
+FROM ‘C:\Users\Name\Location.csv’
+DELIMITER ‘,’ 
+NULL ‘NA’ 
+CSV HEADER; 
+```
