@@ -61,15 +61,18 @@ CREATE TABLE table_name (
 
 - A column <b>CONSTRAINT</b> is an additional requirement or condition for the values in that column. 
     - Common column constaints:
-        - `NOT NULL` Ensures there is never <i>null</i> data (or an absenece of data). Very useful when importing new data to table. For example, if you are importing new  data into a customer sales table and company policy is to always require an email address you would set the email_address column constraint as `NOT NULL`.  
+        - `NOT NULL` Ensures there is never <i>null</i> data (or an absence of data). Very useful when importing new data to table. For example, if you are importing new  data into a customer sales table and company policy is to always require an email address you would set the email_address column constraint as `NOT NULL`.  
          
         - `UNIQUE` Ensures that each value in the column is unique (not repeated). For example, you may want to ensure each row of a phone number column is unique per person.
         - `PRIMARY KEY` An assigned number, used to uniquely identify each row in a table. This can allow you to target, retrieve or modify a row based on the specific PK (primary key).
-  
-### From Dataset ➡️ Table:
+	
+		- `SERIAL` A way of automatically creating new PK integers as more data is entered into a table. Add +1 to each new PK.
+	
+		For more details on constraints: https://www.postgresql.org/docs/14/ddl-constraints.html
+
+### CSV Dataset ➡️ SQL Table:
 Upon reviewing the headers and data types my CSV dataset below, I can build my SQL query to create the table structure.
-<br><img src="https://i.imgur.com/bRSOTyf.png?1" height="80%" width="70%" alt="SqlTut"/></br>
-<br></br>       
+<br><img src="https://i.imgur.com/bRSOTyf.png?1" height="80%" width="70%" alt="SqlTut"/></br>     
 ```sql
 
 --- First table (county_pop)
@@ -110,12 +113,31 @@ CREATE TABLE education_income(
 	);
 ```
 
+Tip: If you make a mistake when assigning a data type or constraint, use the `ALTER` statement.
 
-To learn more about data types and constraints when building your tables, refer to the documention here: https://www.postgresql.org/docs/current/
+
+```sql
+--- Changing data type for a column
+
+ALTER TABLE table_name
+	ALTER COLUMN column_name 
+	TYPE your_new_data_type
+```
+
+```sql
+--- Removing a constraint
+--- To add, replace drop with ADD
+
+ALTER TABLE table_name
+	ALTER COLUMN column_name 
+	DROP constraint_name
+```
+
+
 
 # Import Data into Tables (2 methods)
 Now that we have tables in the database, we need to insert data into those tables. Here are two different ways to accomplish this:
-<br></br>
+
 <br><strong>1. Using PgAdmin (GUI method)</strong></br>
 - This is the easiest. Does not require special file permissions
 - Right-click on your database 
@@ -144,3 +166,21 @@ DELIMITER ‘,’
 NULL ‘NA’ 
 CSV HEADER; 
 ```
+### How to Fix COPY Errors:
+If you get a permission error from PostgreSQL, similar to something like 
+<br>`ERROR: could not open files "YourFile.csv" for reading: Permission Denied"`
+<br>
+<br>There are a couple of ways to approach this, but for my purposes I changed the permission settings for one specific file. 
+- Go to the file/folder you are using for your dataset
+- Right click the file/folder
+- Give Access to ➡️ Specific People
+- Give Read/Write permissions to <i>Everyone</I> (giving the Write permission will allow you to <i>export</i> from PostgreSQL, if that is a step you want)
+
+For both of these import methods, the <i>messages</i> box in your Query Panel will return something like:
+<br>
+`COPY 820
+Query returned succesfullly in 46 msec.`
+	The 820 integer for this example is the total count of number of rows successfully imported. 
+
+# Conclusion
+Now that we have created our tables and imported values into them, we can start analyzing the data with SQL. This concludes this portion of the project and we will move to analyzing in the next section (I will update with a link once the write-up is complete). 
