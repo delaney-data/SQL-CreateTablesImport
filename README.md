@@ -15,48 +15,106 @@ A demonstration of how to create tables in PostgreSQL and import data for analys
 <p style="margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;"></p>
 <ol style="margin-bottom:0in;list-style-type: decimal;margin-left:0.5in;">
     <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">In PgAdmin, create your database first by right-clicking <em>Databases</em> and create a new database.</span></li>
-    <br><img src="https://i.imgur.com/5ctigjL.png" height="80%" width="50%" alt="SqlTut"/></br>
+    <br><img src="https://i.imgur.com/5ctigjL.png" height="60%" width="50%" alt="SqlTut"/></br>
     <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">Name your DB and click save. If you don&rsquo;t immediately see your DB, right-click again on <em>Databases</em> and click <em>refresh</em>.</span></li>
-    <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">Query your DB by right-clicking its name and selecting the <strong>Query Tool</strong>.&nbsp;This will bring up the Query Panel and then you can begin interacting with it via SQL.&nbsp;</span></li><br><img src="https://i.imgur.com/e1eVuUq.png" height =60% width=60% alt="SqlTut"/></br>
+    <li style="margin: 0in 0in 8pt; line-height: 107%; font-size: 16px; font-family: Arial, Helvetica, sans-serif; text-align: left;"><span style="color: rgb(68, 114, 196);">Query your DB by right-clicking its name and selecting the <strong>Query Tool</strong>.&nbsp;This will bring up the Query Panel and then you can begin interacting with it via SQL.&nbsp;</span></li><br><img src="https://i.imgur.com/e1eVuUq.png" height =30% width=30% alt="SqlTut"/></br>
 </ol>
-<p><span style="color: rgb(68, 114, 196); font-size: 16px; font-family: Arial, Helvetica, sans-serif;">Note: If you are working with multiple databases at once, be sure you are keeping track of which one you are currently querying. You can always see which one you currently querying via the top panel. The panel name should be: <strong>YourDatabaseName</strong>/PostgreSQL</span></p>
+
+
+Note: If you are working with multiple databases at once, you can keep track of which one you are currently via the name in the Query Panel. The panel name defines which DB you are in : `YourDatabaseName / PostgreSQL Version #`
+
 
 # Creating tables in PostgreSQL
-<p><span style="color: rgb(0, 0, 0);">As a best practice, before creating tables in any SQL database:&nbsp;</span></p>
-<ul>
-    <li style="color: rgb(0, 0, 0);"><strong>🔎 Review your headers and&nbsp;</strong><strong>data types in your dataset</strong>🔎, as this will guide you in creating your table in the database.</li>
-    <li style="color: rgb(0, 0, 0);">The column headers must match the one we will create with SQL and your datatypes must also be correct in order to import data. As in, you should not create a column as a VARCHAR datatype when the corresponding source dataset column is an INTEGER.&nbsp;</li>
-</ul>
-<p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style="color: rgb(0, 0, 0);">For this project, I will use a dataset from Kaggle.com (USA People Without Internet in 2016). I will create two tables:</span></p>
-<ul style="list-style-type: disc;">
-    <li style="color: rgb(0, 0, 0);">A county population table (county_pop) which will have the <strong>race and population data</strong> with the <strong>percent no internet</strong>.</li>
-    <li><span style="color: rgb(0, 0, 0);">A demographic table (education_income) that has the&nbsp;<strong>education, median age, and income</strong> to compare to the population table</span><span style="color:#4472C4;">.</span></li>
-</ul>
-<figcaption style="margin: 0in; line-height: 12.05pt; font-family: Calibri, sans-serif; text-align: center;"><span style="font-size:15px;"><u>This is the general<em>&nbsp;syntax</em> for creating a table.&nbsp;</u></span><u>Make sure to put a comma in between your columns:</u></figcaption>
-<p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:1.0in;line-height:12.05pt;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:15px;">&nbsp;</span></p>
+As a best practice, before creating tables in any SQL database
+- <strong>🔎 Review your headers and data types in your dataset</strong>🔎, as this will guide you in creating your table in the database.
+- The column headers must match the one we will create with SQL and your data types must also be correct in order to import into the table. 
+     - As in, you should not set a column data type as a `VARCHAR` when the corresponding source dataset column is an `INTEGER`.
+
+For this project, I will use a dataset from Kaggle.com (USA People Without Internet in 2016). From the CSV file, I will create two tables in PostgreSQL:
+- A county population table (county_pop) which will have the <strong>race and population data</strong> with the <strong>percent no internet</strong>.
+- An education level and income level table (education_income) that has the&nbsp;<strong>education, median age, and income</strong> to compare to the population table.
+
+This is the general syntax for creating a table:
 
 ```sql
 CREATE TABLE table_name (
-
                 column_name TYPE column_constraint,
 
                 column_name TYPE column_constraint,
 
-                column_name TYPE column_constraint);
+                column_name TYPE column_constraint
+                );
+
+--- Don't forget the commas between your columns
 ```
 
-<p style="margin: 0in; line-height: 12.05pt; font-size: 15px; font-family: Calibri, sans-serif; text-align: center;"><span style="font-size:15px;"><u>Upon reviewing the dataset below, I can build my SQL query to create the table format.</u>&nbsp;</span></p>
+## Creating Tables: Data Types & Constraints
+- A <b>DATA TYPE</b> specifies the pattern (Text, Number...) of the data and how the value is stored. The values must adhere to the requirements of the type for PostgreSQL to accept.
+    - Common data types:
+        - True or False `boolean`
+        - Character  `char`, `varchar`, and `text`
+        - Numeric `integer` and `float`
+        - Temporal `date`, `time`, `timestamp`
+
+
+        PostgreSQL has many data types, for more details on each type (and storage limitations) refer to this handy documentation:                          https://www.postgresql.org/docs/current/datatype.html
+
+- A column <b>CONTRAINT</b> is an additional requirement or condition for the values in that column.
+    - Common column constaints:
+        - `NOT NULL` Ensures there is never <i>null</i> data (or an absenece of data). Very useful when importing new data to table. For example, if you are importing new  data into a customer sales table and company policy is to always require an email address you would set the email_address column constraint as `NOT NULL`.  
+         
+        - `UNIQUE` Ensures that each value in the column is unique (not repeated). For example, you may want to ensure each row of a phone number column is unique per person.
+        - `PRIMARY KEY` An assigned number, used to uniquely identify each row in a table. This can allow you to target, retrieve or modify a row based on the specific PK (primary key).
+  
+### From dataset to Table:
+Upon reviewing the headers and data types my CSV dataset below, I can build my SQL query to create the table structure.
+
 <br><img src="https://i.imgur.com/bRSOTyf.png?1" height="80%" width="70%" alt="SqlTut"/></br>
+<br></br>       
 
-<blockquote>First table (county_pop)
+```sql
 
-<br><img src="https://i.imgur.com/mCjv9ct.png" height="80%" width="70%" alt="SqlTut"/></br></blockquote>
+--- First table (county_pop)
+--- Contains counties, states, total popoulation numbers (indicated with 'P_'), race numbers, and a percentage of each without having Internet.
 
-<blockquote>Second table (education_income)
+CREATE TABLE county_pop(
+	id_pop SERIAL PRIMARY KEY,
+	county VARCHAR(55) NOT NULL,
+	state VARCHAR(2) NOT NULL,
+	P_total INT,
+	P_white INT,
+	P_black INT,
+	P_asian INT,	
+	P_native INT,
+	P_hawaiian INT,
+	P_others INT,
+	percent_no_internet decimal
+	);
+```
 
-<br><img src="https://i.imgur.com/Y7TAKn3.png?2" height="80%" width="70%" alt="SqlTut"/></br></blockquote>
+```sql
+--- Second table (education_income)
+--- Contains population numbers for education levels, poverty levels, and median age and median income per counties and states.
+
+CREATE TABLE education_income(
+	id SERIAL PRIMARY KEY,
+	county VARCHAR(55) NOT NULL,
+	state VARCHAR(2) NOT NULL,
+	P_below_middle_school INT,
+	P_some_high_school INT,
+	P_high_school_equivalent INT,
+	P_some_college INT,	
+	P_bachelor_and_above INT,
+	P_below_poverty INT,
+	median_age decimal,
+	median_household_income decimal,
+	median_rent_per_income decimal
+	);
+```
+
 <hr>
-As we can see, PostgreSQL has color coding for the column names, data types, and constraints. To learn more about data types and constraints when building your tables, refer to the documention here: https://www.postgresql.org/docs/current/
+
+To learn more about data types and constraints when building your tables, refer to the documention here: https://www.postgresql.org/docs/current/
 
 # Import Data into Tables (2 methods)
 <p>Now that you have the tables in your database, you need to insert data into those tables. Here are two different ways you can do this:</p>
