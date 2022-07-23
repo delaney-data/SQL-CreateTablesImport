@@ -6,8 +6,8 @@ A demonstration of how to create tables in PostgreSQL and import data for analys
 <p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong>Language and Utilities Used:</strong></p>
 <ul style="list-style-type: disc;">
     <li><u>Language</u>: SQL</li>
-    <li><u>DBMS</u>: PostgreSQL 14</li>
-    <li><u>GUI</u>: PgAdmin 4 (on Windows 10)</li>
+    <li><u>DBMS</u>: <a href ="https://www.postgresql.org/">PostgreSQL 14</a></li>
+    <li><u>GUI</u>: <a href ="https://www.pgadmin.org">PgAdmin 4</a> (on Windows 10)</li> 
 </ul>
 <p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong>&nbsp;</strong></p>
 
