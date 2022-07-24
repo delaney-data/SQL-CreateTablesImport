@@ -37,10 +37,14 @@ Note: If you are working with multiple databases at once, you can keep track of 
 
 
 # Creating tables in PostgreSQL
-As a best practice, before creating tables in any SQL database
-- <strong>🔎 Review your headers and data types in your dataset</strong>🔎, as this will guide you in creating your table in the database.
-- The column headers must match the one we will create with SQL and your data types must also be correct in order to import into the table. 
-     - As in, you should not set a column data type as a `VARCHAR` when the corresponding source dataset column is an `INTEGER`.
+As a best practice, before creating tables that are based on a dataset in any SQL database:
+
+- <strong>🔎 Review your headers and data types in your dataset</strong>🔎
+	- The column headers from your <b>dataset</b> must match your <b>SQL table headers</b> and your data types must also agree in order to import into the table. 
+     	- Data type issue example: A column data type as a `VARCHAR` when the corresponding <i>source</i> values is an `INTEGER`.
+     	- Null issue: Be familiar with your data set. 
+     		- You might discover there are `null` strings represented by 'NA' in your column that is assigned an Integer type (which cannot read strings of text). 
+	I demonstrate how to handle nulls in the import section.
 
 For this project, I will use a dataset from Kaggle.com (USA People Without Internet in 2016). 
 
