@@ -2,14 +2,26 @@
 A demonstration of how to create tables in PostgreSQL and import data for analysis.
 
 # Overview
-<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>Before doing an analysis of our data with SQL, we first need to create the database and tables, then import data into our Database Management System (DBMS). In this project, we will be using PostgreSQL and PgAdmin and I will demonstrate how to create your tables and import your data in two different methods (one with SQL commands and one with the GUI).</p>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>Before doing an analysis of data with SQL, we first need to create the database and tables, then import data into our Database Management System (DBMS). In this project, I will be using PostgreSQL and PgAdmin and I will demonstrate how to create tables and import data in two different methods (GUI vs SQL Commands).</p>
 <p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong>Language and Utilities Used:</strong></p>
 <ul style="list-style-type: disc;">
     <li><u>Language</u>: SQL</li>
     <li><u>DBMS</u>: <a href ="https://www.postgresql.org/">PostgreSQL 14</a></li>
     <li><u>GUI</u>: <a href ="https://www.pgadmin.org">PgAdmin 4</a> (on Windows 10)</li> 
 </ul>
-<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong>&nbsp;</strong></p>
+
+📑 <b>Topics Covered in this Section</b> 📑
+
+- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#creating-a-database-in-postgresql-with-pgadmin">Create Database (PgAdmin)</a>
+- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#creating-tables-in-postgresql">Syntax for Creating Tables</a>
+	- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#creating-tables-data-types--constraints">Data Types & Constraints</a> 
+- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#csv-dataset-%EF%B8%8F-sql-table">From CSV to SQL Table</a> 
+- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#import-data-into-tables-2-methods">Importing Data into Tables (2 Methods)</a>
+	- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#how-to-fix-copy-errors">COPY Command: How to Fix Permission Errors</a>
+
+
+
+
 
 # Creating a Database in PostgreSQL with PgAdmin
 <p style="margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;"></p>
@@ -30,9 +42,11 @@ As a best practice, before creating tables in any SQL database
 - The column headers must match the one we will create with SQL and your data types must also be correct in order to import into the table. 
      - As in, you should not set a column data type as a `VARCHAR` when the corresponding source dataset column is an `INTEGER`.
 
-For this project, I will use a dataset from Kaggle.com (USA People Without Internet in 2016). From the CSV file, I will create two tables in PostgreSQL:
-- A county population table (county_pop) which will have the <strong>race and population data</strong> with the <strong>percent no internet</strong>.
-- An education level and income level table (education_income) that has the&nbsp;<strong>education, median age, and income</strong> to compare to the population table.
+For this project, I will use a dataset from Kaggle.com (USA People Without Internet in 2016). 
+
+From the CSV file, I will create two tables in PostgreSQL:
+- A county population table (county_pop) which will have the population and racial data with the percentage of each county with no internet access.
+- An education level and income level table (education_income) that has the education, median age, and income to compare to the population table.
 
 This is the general syntax for creating a table:
 
@@ -66,7 +80,7 @@ CREATE TABLE table_name (
         - `UNIQUE` Ensures that each value in the column is unique (not repeated). For example, you may want to ensure each row of a phone number column is unique per person.
         - `PRIMARY KEY` An assigned number, used to uniquely identify each row in a table. This can allow you to target, retrieve or modify a row based on the specific PK (primary key).
 	
-		- `SERIAL` A way of automatically creating new PK integers as more data is entered into a table. Add +1 to each new PK.
+		- `SERIAL` A way of automatically creating new PK integers (adds +1) as new row data is entered into a table.
 	
 		For more details on constraints: https://www.postgresql.org/docs/14/ddl-constraints.html
 
@@ -183,4 +197,17 @@ Query returned succesfullly in 46 msec.`
 	The 820 integer for this example is the total count of number of rows successfully imported. 
 
 # Conclusion
-Now that we have created our tables and imported values into them, we can start analyzing the data with SQL. This concludes this portion of the project and we will move to analyzing in the next section (I will update with a link once the write-up is complete). 
+In summary, we have: 
+- Created a simple database using PgAdmin
+- Created Tables
+	- Basic Table Syntax
+	- Covered Common Data Types
+	- Covered Common Constraints
+	- Used a Dataset (CVS file) to Create a Table in the Database
+- Imported Values
+	- Graphic Interface Method
+	- COPY Command Method
+
+Now we can begin analyzing the data with SQL commands to answer questions about our dataset. 
+
+This concludes this chapter of the project and we will move to analyzing in the next section (I will update with a link once the write-up is complete). Thanks for reading! 👋
