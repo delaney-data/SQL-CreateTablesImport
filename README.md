@@ -38,18 +38,17 @@ Note: If you are working with multiple databases at once, you can keep track of 
 # Creating tables in PostgreSQL
 As a best practice, before creating tables that are based on a dataset in any SQL database:
 
-- <strong>🔎 Review your headers and data types in your dataset</strong>🔎
-	- The column headers from your <b>dataset</b> must match your <b>SQL table headers</b> and your data types must also agree in order to import into the table. 
-     	- Data type issue example: A column data type as a `VARCHAR` when the corresponding <i>source</i> values is an `INTEGER`.
-     	- Null issue: Be familiar with your data set. 
-     		- You might discover there are `null` strings represented by 'NA' in your column that is assigned an Integer type (which cannot read strings of text). 
-	I demonstrate how to handle nulls in the import section.
+<strong>🔎 Review your headers and data types in your dataset</strong>🔎
+- The column headers from your <b>dataset</b> must match your <b>SQL table headers</b> and your data types must also agree in order to import into the table. 
+	- Data type issue - A column data type as a `VARCHAR` when the corresponding <i>source</i> values is an `INTEGER`.
+	- Null issue - Be familiar with your data set. You might discover there are `null` strings represented by 'NA' in your column that is assigned an Integer type 		(which cannot read strings of text). 
+		I demonstrate how to handle nulls in the import section.
 
-For this project, I will use a dataset from Kaggle.com (USA People Without Internet in 2016). 
+<br>For this project, I will use a dataset from Kaggle.com (USA People Without Internet in 2016). 
 
 From the CSV file, I will create two tables in PostgreSQL:
-- A county population table (county_pop) which will have the population and racial data with the percentage of each county with no internet access.
-- An education level and income level table (education_income) that has the education, median age, and income to compare to the population table.
+1. A county population table (county_pop) which will have the population and racial data with the percentage of each county with no internet access.
+2. An education level and income level table (education_income) that has the education, median age, and income to compare to the population table.
 
 This is the general syntax for creating a table:
 
@@ -62,7 +61,7 @@ CREATE TABLE table_name (
                 column_name TYPE column_constraint
                 );
 
---- Don't forget the commas between your columns
+--- Don't forget the commas between your columns, minus the last column
 ```
 
 ## Creating Tables: Data Types & Constraints
