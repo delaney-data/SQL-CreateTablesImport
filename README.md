@@ -96,7 +96,7 @@ Upon reviewing the headers and data types my CSV dataset below, I can build my S
 
 CREATE TABLE county_pop(
 	id_pop SERIAL PRIMARY KEY,
-	county VARCHAR(55) NOT NULL,
+	county VARCHAR(150) NOT NULL,
 	state VARCHAR(2) NOT NULL,
 	P_total INT,
 	P_white INT,
@@ -115,7 +115,7 @@ CREATE TABLE county_pop(
 
 CREATE TABLE education_income(
 	id SERIAL PRIMARY KEY,
-	county VARCHAR(55) NOT NULL,
+	county VARCHAR(150) NOT NULL,
 	state VARCHAR(2) NOT NULL,
 	P_below_middle_school INT,
 	P_some_high_school INT,
@@ -187,9 +187,9 @@ CSV HEADER; --- We want to leave the headers from our file
 
 
 ### How to Fix COPY Errors:
-If you get a permission error from PostgreSQL, similar to something like 
-<br>`  ERROR: could not open files "YourFile.csv" for reading: Permission Denied  `
-<br>
+If you get a permission error from PostgreSQL, similar to: 
+>`ERROR: could not open files "YourFile.csv" for reading: Permission Denied`
+
 <br>There are a couple of ways to approach this, but for my purposes I changed the permission settings for my specific file. 
 - Go to the file/folder location you are using for your dataset
 - Right click the file/folder
@@ -197,11 +197,23 @@ If you get a permission error from PostgreSQL, similar to something like
 - Give Read/Write permissions to <i>Everyone</I>
 	- Giving the <i>Write</i> permission will allow you to <i>export</i> from PostgreSQL later for sharing or for data visualizations.
 
+
 For both of these import methods, the <i>messages</i> box in your Query Panel will return something like:
 <br>
-`COPY 820
+> `COPY 820
 Query returned succesfullly in 46 msec.`
-	The 820 integer for this example is the total count of number of rows successfully imported. 
+
+The 820 integer for this example is the total count of number of rows successfully imported. 
+	
+
+
+:heavy_check_mark: 
+Testing my imports with a simple `SELECT` all (*) statement to confirm data was added correctly.
+
+
+<img src="https://i.imgur.com/IXnYae5.png?1" height="70%" width="70%" alt="SqlTut Final"/>
+
+
 
 # Conclusion
 In summary, we have: 
