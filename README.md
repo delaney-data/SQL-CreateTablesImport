@@ -87,7 +87,7 @@ CREATE TABLE table_name (
 	
 		For more details on constraints: https://www.postgresql.org/docs/14/ddl-constraints.html
 
-### CSV Dataset ➡️ SQL Table:
+## CSV Dataset ➡️ SQL Table:
 Upon reviewing the headers and data types my CSV dataset below, I can build my SQL query to create the table structure.
 <br><img src="https://i.imgur.com/bRSOTyf.png?1" height="80%" width="70%" alt="SqlTut"/></br>     
 ```sql
