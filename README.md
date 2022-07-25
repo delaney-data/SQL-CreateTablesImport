@@ -1,23 +1,22 @@
 # Creating Tables with SQL and Importing Data
 A demonstration of how to create tables in PostgreSQL and import data for analysis.
 
-# Overview
-<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>Before doing an analysis of data with SQL, we first need to create the database and tables, then import data into our Database Management System (DBMS). In this project, I will be using PostgreSQL and PgAdmin and I will demonstrate how to create tables and import data in two different methods (GUI vs SQL Commands).</p>
-<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong>Language and Utilities Used:</strong></p>
-<ul style="list-style-type: disc;">
-    <li><u>Language</u>: SQL</li>
-    <li><u>DBMS</u>: <a href ="https://www.postgresql.org/">PostgreSQL 14</a></li>
-    <li><u>GUI</u>: <a href ="https://www.pgadmin.org">PgAdmin 4</a> (on Windows 10)</li> 
-</ul>
+## Overview
+In this project, I will be using PostgreSQL and PgAdmin and I will demonstrate how to create tables from a dataset, review common data types and constraints, and how to import data via two different methods (GUI vs SQL Commands).
 
-📑 <b>Topics Covered in this Section</b> 📑
+<strong>Language and Utilities Used:</strong>
+- Language: `SQL`
+- DBMS: [PostgreSQL 14](https://www.postgresql.org/)
+- GUI: [PgAdmin 4](https://www.pgadmin.org/) on Windows 10
 
-- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#creating-a-database-in-postgresql-with-pgadmin">Create Database (PgAdmin)</a>
-- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#creating-tables-in-postgresql">Syntax for Creating Tables</a>
-	- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#creating-tables-data-types--constraints">Data Types & Constraints</a> 
-- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#csv-dataset-%EF%B8%8F-sql-table">From CSV to SQL Table</a> 
-- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#import-data-into-tables-2-methods">Importing Data into Tables (2 Methods)</a>
-	- <a href ="https://github.com/delaney-data/SQL-CreateTablesImport/edit/main/README.md#how-to-fix-copy-errors">COPY Command: How to Fix Permission Errors</a>
+:round_pushpin: <b>Table of Contents</b> :round_pushpin:
+
+- [Create Database (PgAdmin)](https://github.com/delaney-data/SQL-CreateTablesImport#creating-a-database-in-postgresql-with-pgadmin)
+- [Syntax for Creating Tables](https://github.com/delaney-data/SQL-CreateTablesImport#creating-tables-in-postgresql)
+	- [Data Types & Constraints](https://github.com/delaney-data/SQL-CreateTablesImport#creating-tables-data-types--constraints)
+- [From CSV to SQL Table](https://github.com/delaney-data/SQL-CreateTablesImport#csv-dataset-%EF%B8%8F-sql-table) 
+- [Importing Data into Tables (2 Methods)](https://github.com/delaney-data/SQL-CreateTablesImport#import-data-into-tables-2-methods)
+	- [COPY Command: How to Fix Permission Errors](https://github.com/delaney-data/SQL-CreateTablesImport#how-to-fix-copy-errors)
 
 
 
@@ -139,7 +138,7 @@ Tip: If you make a mistake when assigning a data type or constraint, use the `AL
 
 ALTER TABLE table_name
 	ALTER COLUMN column_name 
-	TYPE your_new_data_type
+	TYPE your_new_data_type;
 ```
 
 ```sql
@@ -148,13 +147,13 @@ ALTER TABLE table_name
 
 ALTER TABLE table_name
 	ALTER COLUMN column_name 
-	DROP constraint_name
+	DROP constraint_name;
 ```
 
 
 
 # Import Data into Tables (2 methods)
-Now that we have tables in the database, we need to insert data into those tables. Here are two different ways to accomplish this:
+Now that we have tables in the database, we need to insert values into those tables. Here are two ways to accomplish this:
 
 <br><strong>1. Using PgAdmin (GUI method)</strong></br>
 - This is the easiest. Does not require special file permissions
@@ -180,19 +179,24 @@ Now that we have tables in the database, we need to insert data into those table
 ```sql
 COPY table_name (column_name, column_name, etc ...)
 FROM ‘C:\Users\Name\Location.csv’
-DELIMITER ‘,’ 
-NULL ‘NA’ 
-CSV HEADER; 
+DELIMITER ‘,’ --- Since we are using a CSV (comma seperated values) file formant, the DELIMITER is ','
+NULL ‘NA’ --- We are declaring that any null data is represented by the string 'NA'
+CSV HEADER; --- We want to leave the headers from our file
+
 ```
+
+
+
 ### How to Fix COPY Errors:
 If you get a permission error from PostgreSQL, similar to something like 
-<br>`ERROR: could not open files "YourFile.csv" for reading: Permission Denied"`
+<br>`  ERROR: could not open files "YourFile.csv" for reading: Permission Denied  `
 <br>
-<br>There are a couple of ways to approach this, but for my purposes I changed the permission settings for one specific file. 
-- Go to the file/folder you are using for your dataset
+<br>There are a couple of ways to approach this, but for my purposes I changed the permission settings for my specific file. 
+- Go to the file/folder location you are using for your dataset
 - Right click the file/folder
 - Give Access to ➡️ Specific People
-- Give Read/Write permissions to <i>Everyone</I> (giving the Write permission will allow you to <i>export</i> from PostgreSQL, if that is a step you want)
+- Give Read/Write permissions to <i>Everyone</I>
+	- Giving the <i>Write</i> permission will allow you to <i>export</i> from PostgreSQL later for sharing or for data visualizations.
 
 For both of these import methods, the <i>messages</i> box in your Query Panel will return something like:
 <br>
